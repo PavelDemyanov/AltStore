@@ -102,6 +102,12 @@ class FetchAnisetteDataOperation: ResultOperation<ALTAnisetteData>, @unchecked S
                 else if let server = self.context.server
                 {
                     anisetteData = try await self.fetchAnisetteData(fromAltServer: server)
+
+                    // Сверх #1851: AltServer не передаёт User-Agent своего источника anisette, и AltSign подставляет
+                    // запасной akd/1.0 CFNetwork/808.1.4 — на него Apple отвечает HTTP 503 при любом описании устройства
+                    // (Mac, Windows). Ставим User-Agent серверов v3 из remote-altservers.json — у них же берёт anisette
+                    // AltServer на macOS 27, а с описаниями других систем Apple его тоже принимает.
+                    ALTAppleAPI.shared.authenticationUserAgent = "akd/1.0 CFNetwork/811.5.4 Darwin/16.7.0"
                 }
                 else
                 {

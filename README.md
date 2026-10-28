@@ -1,3 +1,21 @@
+> [!IMPORTANT]
+> **Unofficial modified build — branch `signin-fix-2.3.1` (October 2026).**
+> This is AltStore Classic 2.3.1 with a fix for Apple ID sign-in failing with **HTTP 503**
+> ([altstoreio/AltStore#1842](https://github.com/altstoreio/AltStore/issues/1842)). It is not made or supported by the AltStore team.
+>
+> Changes from upstream `classic` (2.3.1):
+> - [#1851](https://github.com/altstoreio/AltStore/pull/1851) by Igor Szalay — sends the anisette server's User-Agent with
+>   GrandSlam requests (sign-in through Remote AltServer).
+> - The same for sign-in through AltServer on your computer: AltServer doesn't pass a User-Agent along with anisette data,
+>   so AltSign fell back to `akd/1.0 CFNetwork/808.1.4`, which Apple now answers with HTTP 503. AltStore now uses the
+>   anisette v3 servers' User-Agent (`AltStore/Operations/FetchAnisetteDataOperation.swift`).
+> - `pack.sh` — builds an IPA with Xcode 27 (`sh pack.sh` → `build/AltStore-2.3.1-signin-fix.ipa`).
+>
+> Install it with AltServer: hold Option (Shift on Windows), click the AltServer icon → **Sideload .ipa…**.
+> Made for [BG3iOS](https://github.com/PavelDemyanov/BG3iOS). Once an official AltStore release fixes sign-in, install that instead.
+>
+> Licensed under AGPL-3.0, like AltStore.
+
 # AltStore
 
 > AltStore is an alternative app store for non-jailbroken iOS devices. 
